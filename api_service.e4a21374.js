@@ -59,4 +59,4 @@ module.exports=require("./lib/axios");
 },{"axios":"dZBD"}],"Ugdu":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.searchAddress=r,exports.getNearbyAddresses=s;var e=require("/api/api_functions.js");function r(r){var s={sok:r,treffPerSide:100,side:0,asciiKompatibel:!0};return(0,e.get)("/sok",s)}function s(r,s){var t={radius:500,lat:s,lon:r,treffPerSide:100,side:0,asciiKompatibel:!0};return(0,e.get)("/punktsok",t)}
 },{"/api/api_functions.js":"MOVF"}]},{},["Ugdu"], null)
-//# sourceMappingURL=/api_service.e4a21374.map
+//# sourceMappingURL=api_service.e4a21374.map

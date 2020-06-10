@@ -57,4 +57,4 @@ module.exports=require("./lib/axios");
 },{"./lib/axios":"nUiQ"}],"MOVF":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.get=t;var e=require("axios").default,r={headers:{accept:"application/json"}};function t(t,s){var a="https://ws.geonorge.no/adresser/v1"+t;return e.get(a,{params:s},r)}
 },{"axios":"dZBD"}]},{},["MOVF"], null)
-//# sourceMappingURL=/api_functions.734e5398.map
+//# sourceMappingURL=api_functions.734e5398.map
