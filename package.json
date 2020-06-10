@@ -4,10 +4,11 @@
     "ol": "6.3.1"
   },
   "devDependencies": {
-    "parcel": "1.11.0"
+    "parcel": "1.11.0",
+    "parcel-plugin-static-files-copy": "^2.4.2"
   },
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build --experimental-scope-hoisting --public-url . index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build --experimental-scope-hoisting --public-url . src/index.html"
   }
 }

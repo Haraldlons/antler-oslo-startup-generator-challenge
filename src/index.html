@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>OpenLayers Marker Popups</title>
+    <style>
+      .map {
+        width: 100%;
+        height: 500px;
+      }
+      .inner {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="inner">
+        <h2>Antler Oslo Startup Generator Challenge</h2>
+        <p>
+          Her kan du søke etter en norsk adresse, og få de 5 sist solgte
+          boligene i en radius av 500 meter fra oppsøkt adresse.
+        </p>
+        <input type="text" placeholder="Adresse" style="margin-bottom: 1rem;" />
+        <button>Søk</button>
+      </div>
+    </div>
+    <div id="mapdiv" class="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
