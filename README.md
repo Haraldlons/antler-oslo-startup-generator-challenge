@@ -26,3 +26,7 @@ npm start
 Fancy backend or frameworks are not needed. Services like Kartverket and SSB or similar services could give you access to the numbers you need to accomplish the task. The key to solving this task is to get access to API's.
 
 Please also make sure that the web-app runs on Github pages.
+
+# Style Guide
+
+I use the [Google Javascript Style Guide](https://google.github.io/styleguide/jsguide.html).
