@@ -1,5 +1,59 @@
 import { searchAddress } from "/api/api_service.js";
-console.log(searchAddress("harald"));
+import { get2 } from "./api/api_functions";
+var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
+var epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+
+var myLink = document.getElementById("submit");
+
+const addWaypoint = (lon, lat, description, vectorLayer) => {
+  var feature = new OpenLayers.Feature.Vector(
+    new OpenLayers.Geometry.Point(lon, lat).transform(epsg4326, projectTo),
+    { description: description },
+    {
+      externalGraphic: "img/house.png",
+      graphicHeight: 25,
+      graphicWidth: 21,
+      graphicXOffset: -12,
+      graphicYOffset: -25,
+    }
+  );
+  vectorLayer.addFeatures(feature);
+};
+
+myLink.onclick = function () {
+  console.log("Clicked");
+  searchAddress("harald").then((res) => {
+    var data = res.data.adresser[0];
+    console.log(data);
+
+    // addWaypoint(
+    //   data.representasjonspunkt.lon,
+    //   data.representasjonspunkt.lat,
+    //   "Huset mitt",
+    //   vectorLayer
+    // );
+
+    var lonLat = new OpenLayers.LonLat(
+      data.representasjonspunkt.lon,
+      data.representasjonspunkt.lat
+    ).transform(epsg4326, projectTo);
+    map.setCenter(lonLat, 16);
+
+    get2().then((result) => {
+      console.log("Result2");
+      console.log(result);
+      result.data.adresser.slice(1).forEach(function (item, index) {
+        console.log(item, index);
+        addWaypoint(
+          item.representasjonspunkt.lon,
+          item.representasjonspunkt.lat,
+          item.adressetekst,
+          vectorLayer
+        );
+      });
+    });
+  });
+};
 
 var map = new OpenLayers.Map("mapdiv");
 map.addLayer(new OpenLayers.Layer.OSM());
@@ -12,10 +66,8 @@ var lonLat = new OpenLayers.LonLat(10.757933, 59.911491).transform(
   projectTo
 );
 
-var zoom = 12;
+var zoom = 11;
 map.setCenter(lonLat, zoom);
-
-var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 
 // Define markers as "features" of the vector layer:
 var feature = new OpenLayers.Feature.Vector(
