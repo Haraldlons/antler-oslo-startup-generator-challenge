@@ -13,6 +13,8 @@
   },
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build --experimental-scope-hoisting --public-url . src/index.html"
+    "build": "parcel build --experimental-scope-hoisting --public-url . src/index.html",
+    "predeploy": "rm -rf dist && parcel build index.html",
+    "deploy": "gh-pages -d dist"
   }
 }
