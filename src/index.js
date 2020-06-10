@@ -1,57 +1,53 @@
 import { searchAddress } from "/api/api_service.js";
-import { get2 } from "./api/api_functions";
+import { getNearbyAddresses } from "./api/api_service";
+import { addWaypoint } from "./add_waypoint.js";
 var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 var epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+var adresseTekst;
 
-var myLink = document.getElementById("submit");
-
-const addWaypoint = (lon, lat, description, vectorLayer) => {
-  var feature = new OpenLayers.Feature.Vector(
-    new OpenLayers.Geometry.Point(lon, lat).transform(epsg4326, projectTo),
-    { description: description },
-    {
-      externalGraphic: "img/house.png",
-      graphicHeight: 25,
-      graphicWidth: 21,
-      graphicXOffset: -12,
-      graphicYOffset: -25,
-    }
-  );
-  vectorLayer.addFeatures(feature);
+var adresseInput = document.getElementById("adresseInput");
+adresseInput.oninput = function (params) {
+  console.log(params.srcElement.value);
+  adresseTekst = params.srcElement.value;
 };
 
+var myLink = document.getElementById("sok");
+
 myLink.onclick = function () {
-  console.log("Clicked");
-  searchAddress("harald").then((res) => {
+  searchAddress(adresseTekst).then((res) => {
     var data = res.data.adresser[0];
     console.log(data);
+    if (data) {
+      addWaypoint(
+        data.representasjonspunkt.lon,
+        data.representasjonspunkt.lat,
+        "Huset mitt",
+        projectTo,
+        vectorLayer
+      );
 
-    // addWaypoint(
-    //   data.representasjonspunkt.lon,
-    //   data.representasjonspunkt.lat,
-    //   "Huset mitt",
-    //   vectorLayer
-    // );
+      var lonLat = new OpenLayers.LonLat(
+        data.representasjonspunkt.lon,
+        data.representasjonspunkt.lat
+      ).transform(epsg4326, projectTo);
+      map.setCenter(lonLat, 16);
 
-    var lonLat = new OpenLayers.LonLat(
-      data.representasjonspunkt.lon,
-      data.representasjonspunkt.lat
-    ).transform(epsg4326, projectTo);
-    map.setCenter(lonLat, 16);
-
-    get2().then((result) => {
-      console.log("Result2");
-      console.log(result);
-      result.data.adresser.slice(1).forEach(function (item, index) {
-        console.log(item, index);
-        addWaypoint(
-          item.representasjonspunkt.lon,
-          item.representasjonspunkt.lat,
-          item.adressetekst,
-          vectorLayer
-        );
+      getNearbyAddresses(
+        data.representasjonspunkt.lon,
+        data.representasjonspunkt.lat
+      ).then((result) => {
+        console.log(result);
+        result.data.adresser.slice(1).forEach(function (item, index) {
+          addWaypoint(
+            item.representasjonspunkt.lon,
+            item.representasjonspunkt.lat,
+            item.adressetekst,
+            projectTo,
+            vectorLayer
+          );
+        });
       });
-    });
+    }
   });
 };
 
