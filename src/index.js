@@ -1,8 +1,11 @@
-map = new OpenLayers.Map("mapdiv");
+import { searchAddress } from "/api/api_service.js";
+console.log(searchAddress("harald"));
+
+var map = new OpenLayers.Map("mapdiv");
 map.addLayer(new OpenLayers.Layer.OSM());
 
-epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
-projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+var epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+var projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
 
 var lonLat = new OpenLayers.LonLat(10.757933, 59.911491).transform(
   epsg4326,
