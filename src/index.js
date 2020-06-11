@@ -1,6 +1,8 @@
 import { searchAddress } from "/api/api_service.js";
 import { getNearbyAddresses } from "./api/api_service";
 import { addWaypoint } from "./add_waypoint.js";
+import { getRandomDate, getRandomPrice } from "./random.js";
+
 var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 var epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
 var adresseTekst;
@@ -60,11 +62,9 @@ myLink.onclick = function () {
             addWaypoint(
               item.representasjonspunkt.lon,
               item.representasjonspunkt.lat,
-              item.adressetekst +
-                ", " +
-                item.postnummer +
-                " - " +
-                item.poststed,
+              `${item.adressetekst}, ${item.postnummer} - ${
+                item.poststed
+              }. Dato: ${getRandomDate()}. Pris: ${getRandomPrice()}`,
               projectTo,
               vectorLayer
             );
