@@ -8,7 +8,7 @@ Author: Harald Lønsethagen
 
 # Live Demo
 
-This repo is hosted at GitHub Pages at [<link>](www.github.com).
+This repo is hosted at GitHub Pages at [https://haraldlons.github.io/antler-oslo-startup-generator-challenge/](https://haraldlons.github.io/antler-oslo-startup-generator-challenge/).
 
 # Getting started
 
