@@ -2,6 +2,7 @@
 
 During the application process of Antler Oslo Startup Generator, they served us with a technical challenge of replicating the functionality at [eiendomspriser.no](http://eiendomspriser.no/).
 This website aims to do so.
+(Unfortunately, I was not able to gather information about the selling date of houses and apartments)
 
 Author: Harald Lønsethagen
 
