@@ -32,6 +32,19 @@ Please also make sure that the web-app runs on Github pages.
 
 I use the [Google Javascript Style Guide](https://google.github.io/styleguide/jsguide.html).
 
+# Docker
+
+We all love Docker, so why not try it:
+```bash
+cd antler-oslo-startup-generator-challenge
+docker build -t antler .
+docker run -p 1234:1234 -d antler
+# Open browser at http://localhost:1234/
+# To stop container
+docker ps
+docker stop <id>
+```
+
 # Other Comments
 
 As the challenge was about using vanilla html, js and css, it was a bit unfamiliar, since I have been using various libraries for web development for the last 3 years. Doing it plain would often mean more barebone design. 
