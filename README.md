@@ -31,3 +31,7 @@ Please also make sure that the web-app runs on Github pages.
 # Style Guide
 
 I use the [Google Javascript Style Guide](https://google.github.io/styleguide/jsguide.html).
+
+# Other Comments
+
+As the challenge was about using vanilla html, js and css, it was a bit unfamiliar, since I have been using various libraries for web development for the last 3 years. Doing it plain would often mean more barebone design. 
