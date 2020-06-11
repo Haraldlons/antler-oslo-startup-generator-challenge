@@ -1947,6 +1947,38 @@ var addWaypoint = function addWaypoint(lon, lat, description, projectTo, vectorL
 };
 
 exports.addWaypoint = addWaypoint;
+},{}],"random.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getRandomDate = getRandomDate;
+exports.getRandomPrice = getRandomPrice;
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function getRandomDate() {
+  var min = 645066548;
+  var max = 1560215368;
+  var randTS = getRandomArbitrary(min, max);
+  var date = new Date(randTS * 1000);
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var year = date.getFullYear();
+  var month = months[date.getMonth()];
+  var date = date.getDate();
+  var formattedDate = year + "-" + month + "-" + date;
+  return formattedDate;
+}
+
+function getRandomPrice() {
+  var min = 3400000;
+  var max = 9200000;
+  var randPrice = getRandomArbitrary(min, max);
+  return Math.floor(randPrice);
+}
 },{}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -1955,6 +1987,8 @@ var _api_service = require("/api/api_service.js");
 var _api_service2 = require("./api/api_service");
 
 var _add_waypoint = require("./add_waypoint.js");
+
+var _random = require("./random.js");
 
 var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
 var epsg4326 = new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
@@ -1997,7 +2031,7 @@ myLink.onclick = function () {
       (0, _api_service2.getNearbyAddresses)(data.representasjonspunkt.lon, data.representasjonspunkt.lat).then(function (result) {
         result.data.adresser.slice(1).forEach(function (item, index) {
           if (index < 5) {
-            (0, _add_waypoint.addWaypoint)(item.representasjonspunkt.lon, item.representasjonspunkt.lat, item.adressetekst + ", " + item.postnummer + " - " + item.poststed, projectTo, vectorLayer);
+            (0, _add_waypoint.addWaypoint)(item.representasjonspunkt.lon, item.representasjonspunkt.lat, "".concat(item.adressetekst, ", ").concat(item.postnummer, " - ").concat(item.poststed, ". Dato: ").concat((0, _random.getRandomDate)(), ". Pris: ").concat((0, _random.getRandomPrice)()), projectTo, vectorLayer);
           }
         });
       });
@@ -2036,7 +2070,7 @@ function destroyPopup(feature) {
 
 map.addControl(controls["selector"]);
 controls["selector"].activate();
-},{"/api/api_service.js":"api/api_service.js","./api/api_service":"api/api_service.js","./add_waypoint.js":"add_waypoint.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"/api/api_service.js":"api/api_service.js","./api/api_service":"api/api_service.js","./add_waypoint.js":"add_waypoint.js","./random.js":"random.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2063,7 +2097,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33597" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33473" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
